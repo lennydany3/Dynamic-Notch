@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     // from here also drags in its minified `dist/` bundle, which produces
     // enough findings in one line to crash ESLint's formatter outright.
     "product/**",
+    // Claude Design export (reference HTML + its runtime), not site code.
+    "upload/**",
   ]),
 ]);
 
