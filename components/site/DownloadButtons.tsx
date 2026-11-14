@@ -66,7 +66,7 @@ export default function DownloadButtons({ className = "" }: { className?: string
         url={site.url}
         className="mx-auto block max-w-[320px] cursor-pointer rounded-[26px] border-0 bg-[var(--text)] px-[26px] py-4 text-center text-[16px] leading-[1.35] font-semibold text-balance text-[#07070a] md:hidden"
       >
-        Crest is for Windows 11 — send yourself the link
+        Crest is for Windows 11. Send yourself the link
       </SendLink>
     </div>
   );
