@@ -1,15 +1,13 @@
-import Community from "@/components/site/Community";
-import DownloadSection from "@/components/site/DownloadSection";
-import Faq from "@/components/site/Faq";
+import BuiltInPublic from "@/components/site/BuiltInPublic";
 import Features from "@/components/site/Features";
+import GetCrest from "@/components/site/GetCrest";
 import Hero from "@/components/site/Hero";
-import HowItWorks from "@/components/site/HowItWorks";
-import LittleThings from "@/components/site/LittleThings";
-import Origin from "@/components/site/Origin";
-import Preferences from "@/components/site/Preferences";
+import NetworkCalls from "@/components/site/NetworkCalls";
+import NotchLive from "@/components/site/NotchLive";
+import PageEffects from "@/components/site/PageEffects";
+import SectionDivider from "@/components/site/SectionDivider";
 import SiteFooter from "@/components/site/SiteFooter";
 import SiteHeader from "@/components/site/SiteHeader";
-import UnderTheHood from "@/components/site/UnderTheHood";
 import WhatsNew from "@/components/site/WhatsNew";
 import { getReleases } from "@/lib/changelog";
 import { activeSocials, site } from "@/lib/site";
@@ -23,6 +21,7 @@ const jsonLd = {
   operatingSystem: "Windows 10, Windows 11",
   softwareVersion: site.version,
   downloadUrl: site.download,
+  installUrl: site.store,
   url: site.url,
   license: "https://opensource.org/licenses/MIT",
   author: { "@type": "Person", name: site.author, url: site.authorUrl },
@@ -30,6 +29,12 @@ const jsonLd = {
   sameAs: activeSocials.map((social) => social.href),
 };
 
+/**
+ * The home page is a Server Component: every section below renders to HTML on
+ * the server. The only client code on it is the pointer-follow on the 3D mark,
+ * the scroll-pinned notch demo, the share button shown on phones, the changelog
+ * modal, and <PageEffects>, a renderless scroll observer.
+ */
 export default function Home() {
   const releases = getReleases();
 
@@ -40,20 +45,19 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SiteHeader />
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-clip">
         <Hero />
-        <Origin />
+        <NotchLive />
+        <SectionDivider />
         <Features />
-        <LittleThings />
-        <Preferences />
-        <HowItWorks />
-        <UnderTheHood />
-        <DownloadSection />
-        <Community />
-        <Faq />
+        <NetworkCalls />
+        <SectionDivider />
+        <BuiltInPublic />
+        <GetCrest />
       </main>
       <SiteFooter />
       <WhatsNew releases={releases} />
+      <PageEffects />
     </>
   );
 }

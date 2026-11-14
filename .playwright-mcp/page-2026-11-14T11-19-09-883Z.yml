@@ -1,0 +1,198 @@
+- generic [active] [ref=f1e1]:
+  - banner:
+    - navigation "Primary" [ref=f1e2]:
+      - link "Crest home" [ref=f1e3] [cursor=pointer]:
+        - /url: /#top
+        - generic [ref=f1e12]: Crest
+      - generic [ref=f1e13]:
+        - link "Features" [ref=f1e14] [cursor=pointer]:
+          - /url: /#features
+        - link "Privacy" [ref=f1e15] [cursor=pointer]:
+          - /url: /privacy
+        - button "Changelog" [ref=f1e16] [cursor=pointer]
+        - link "GitHub" [ref=f1e17] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - link "Get Crest" [ref=f1e18] [cursor=pointer]:
+          - /url: https://apps.microsoft.com/detail/9nr4hxtldn0s
+  - main [ref=f1e19]:
+    - generic [ref=f1e21]:
+      - generic [ref=f1e22]:
+        - paragraph [ref=f1e23]: Privacy
+        - heading "Nothing to collect, so nothing collected." [level=2] [ref=f1e24]:
+          - text: Nothing to collect,
+          - generic [ref=f1e25]: so nothing collected.
+        - paragraph [ref=f1e26]: Crest is a Windows desktop utility from Lenny Dany Derek D. This is a plain account of what it touches on your machine, what it keeps, and the only two services it ever talks to.
+        - paragraph [ref=f1e27]: Effective August 28, 2026 · Version 0.7.2
+      - generic [ref=f1e28]:
+        - generic [ref=f1e29]:
+          - heading "The short version" [level=3] [ref=f1e30]
+          - generic [ref=f1e31]:
+            - paragraph [ref=f1e32]: Crest has no account, no sign-in, no sync service, no telemetry and no analytics. It does not profile you, does not show you advertising, and has nothing about you to sell or share, because it never collects anything in the first place.
+            - paragraph [ref=f1e33]: "Everything Crest makes — your notes, your reminders, your shelved files, your preferences — is written to a folder on your own machine and stays there. Two things leave it, both described below and neither one carrying anything about you: a check for a new version, and the forecast for a place you typed in yourself."
+        - generic [ref=f1e34]:
+          - heading "What Crest stores on your device" [level=3] [ref=f1e35]
+          - generic [ref=f1e36]:
+            - paragraph [ref=f1e37]:
+              - text: These are written as ordinary files in Crest’s own app-data folder, which on a standard install is
+              - code [ref=f1e38]: "%APPDATA%\\com.lenny.crest"
+              - text: . They are plain text you can open, copy or delete yourself.
+            - list [ref=f1e39]:
+              - listitem [ref=f1e40]:
+                - generic [ref=f1e41]: Quick notes
+                - generic [ref=f1e42]: The notes you write in the notch, and their titles.
+              - listitem [ref=f1e43]:
+                - generic [ref=f1e44]: Calendar reminders
+                - generic [ref=f1e45]: What you asked to be reminded about, and when.
+              - listitem [ref=f1e46]:
+                - generic [ref=f1e47]: Timer
+                - generic [ref=f1e48]: The end time of a running countdown, so an update installing in the background does not lose it.
+              - listitem [ref=f1e49]:
+                - generic [ref=f1e50]: File shelf
+                - generic [ref=f1e51]:
+                  - text: The
+                  - emphasis [ref=f1e52]: paths
+                  - text: of the files you dragged in — not the files. A shelved item is a pointer to a file that is already yours, sitting where you already keep it. Nothing is copied or duplicated.
+              - listitem [ref=f1e53]:
+                - generic [ref=f1e54]: Preferences
+                - generic [ref=f1e55]: Your theme, accent, position, display choice, shortcut, and the rest of what is in Settings.
+              - listitem [ref=f1e56]:
+                - generic [ref=f1e57]: Banner memo
+                - generic [ref=f1e58]: If you switch on “silence Windows’ own banners”, Crest records which apps it changed, purely so it can hand every one of them back when you switch it off or quit.
+        - generic [ref=f1e59]:
+          - heading "What Crest reads but never stores" [level=3] [ref=f1e60]
+          - generic [ref=f1e61]:
+            - paragraph [ref=f1e62]: Most of what the notch shows you is read live, drawn, and then forgotten. None of it is written to disk and none of it is sent anywhere.
+            - list [ref=f1e63]:
+              - listitem [ref=f1e64]:
+                - generic [ref=f1e65]: Clipboard history
+                - generic [ref=f1e66]: Held in memory only, capped at a small number of recent entries, and gone the moment Crest closes. It is never written to disk. On top of that, capture is skipped entirely while a known password manager is the focused window, so a password you copy out of one is not picked up at all.
+              - listitem [ref=f1e67]:
+                - generic [ref=f1e68]: Screenshots
+                - generic [ref=f1e69]:
+                  - text: Crest does not take screenshots. It
+                  - emphasis [ref=f1e70]: reads
+                  - text: the folders Windows already saves them to — your Screenshots and Captures folders — and shows you the most recent ones. Nothing is captured, copied, moved or deleted; the card is a window onto files that are already yours.
+              - listitem [ref=f1e71]:
+                - generic [ref=f1e72]: Notifications
+                - generic [ref=f1e73]: Read from the Windows notification centre so the notch can show them. Crest keeps no copy of its own once one leaves the centre, and it cannot see notifications that never arrived there.
+              - listitem [ref=f1e74]:
+                - generic [ref=f1e75]: What is playing
+                - generic [ref=f1e76]: Title, artist and artwork from the same Windows media session your volume flyout reads. Displayed, not recorded.
+              - listitem [ref=f1e77]:
+                - generic [ref=f1e78]: System readings
+                - generic [ref=f1e79]: CPU, memory, GPU, disk, temperature, battery, network and Bluetooth status, read from Windows for the meters and the pill. No history is kept.
+              - listitem [ref=f1e80]:
+                - generic [ref=f1e81]: Installed apps and audio devices
+                - generic [ref=f1e82]: The launcher lists what is installed on your machine and Quick Access lists your sound devices, both read from Windows when the card is open.
+        - generic [ref=f1e83]:
+          - heading "The two services Crest talks to" [level=3] [ref=f1e84]
+          - generic [ref=f1e85]:
+            - paragraph [ref=f1e86]: This is the whole of Crest’s outbound network traffic. There is no third service, and both of these are listed in the source.
+            - list [ref=f1e87]:
+              - listitem [ref=f1e88]:
+                - generic [ref=f1e89]: Open-Meteo
+                - generic [ref=f1e90]:
+                  - text: The weather card talks to
+                  - link "Open-Meteo" [ref=f1e91] [cursor=pointer]:
+                    - /url: https://open-meteo.com/
+                  - text: ", and nothing happens there until you go looking for a place. Searching for one in Settings sends the text you typed, so it can be turned into coordinates. Once you have picked one, the card sends those coordinates and the time zone they resolved to, and gets a forecast back. Neither request carries an account, an API key or any identifier — they name Crest and its version, the way every browser sends a user agent, and nothing about you or your machine. There is deliberately no automatic location and no IP lookup: Crest does not know where you are unless you tell it, and until you do, nothing is fetched at all. Clearing the location in Settings stops it."
+              - listitem [ref=f1e92]:
+                - generic [ref=f1e93]: GitHub
+                - generic [ref=f1e94]:
+                  - text: Crest checks
+                  - link "GitHub" [ref=f1e95] [cursor=pointer]:
+                    - /url: https://github.com/LennyDany-03/Dynamic-Notch/releases
+                  - text: shortly after starting and periodically after that to see whether a newer version has been published, and downloads the installer if one has. It is an ordinary web request for a public file, with nothing attached identifying you or your machine.
+            - paragraph [ref=f1e96]: Neither request carries a user id, a device id, a licence key, or anything about how you use the app. Nothing you write, copy, shelve or open is ever transmitted.
+        - generic [ref=f1e97]:
+          - heading "What Crest does not do" [level=3] [ref=f1e98]
+          - list [ref=f1e100]:
+            - listitem [ref=f1e101]:
+              - generic [ref=f1e102]: No telemetry
+              - generic [ref=f1e103]: There is no analytics, usage-tracking or crash-reporting library in the app. Nothing reports back on what you opened or how often.
+            - listitem [ref=f1e104]:
+              - generic [ref=f1e105]: No accounts
+              - generic [ref=f1e106]: There is nothing to sign up for, so there is no email, password or profile to hold.
+            - listitem [ref=f1e107]:
+              - generic [ref=f1e108]: No advertising
+              - generic [ref=f1e109]: No ads, no ad identifiers, no tracking pixels, no third-party scripts.
+            - listitem [ref=f1e110]:
+              - generic [ref=f1e111]: No sale or sharing
+              - generic [ref=f1e112]: Nothing is sold, rented, shared or handed to advertisers, data brokers or anyone else — there is no collected data for any of that to apply to.
+            - listitem [ref=f1e113]:
+              - generic [ref=f1e114]: No hidden copies
+              - generic [ref=f1e115]: Crest does not upload, back up or sync your notes, files, clipboard or screenshots anywhere.
+        - generic [ref=f1e116]:
+          - heading "What Crest asks Windows for, and why" [level=3] [ref=f1e117]
+          - generic [ref=f1e118]:
+            - paragraph [ref=f1e119]: A few features need permission from Windows itself. Each one is used for exactly the feature it belongs to, and nothing more.
+            - list [ref=f1e120]:
+              - listitem [ref=f1e121]:
+                - generic [ref=f1e122]: Notification access
+                - generic [ref=f1e123]: Needed to show your notifications in the notch. Windows asks you to allow this the first time, and you can revoke it at any point in Windows Settings; Crest simply stops showing them.
+              - listitem [ref=f1e124]:
+                - generic [ref=f1e125]: Start with Windows
+                - generic [ref=f1e126]: Only if you switch it on. Crest registers a scheduled task that runs at logon, without elevation, and removes it when you switch the setting off or uninstall the app.
+              - listitem [ref=f1e127]:
+                - generic [ref=f1e128]: Silencing Windows banners
+                - generic [ref=f1e129]: Only if you switch it on. Crest turns off the per-app notification banner for apps that raise one, so a notification appears in the notch rather than twice. Delivery is never blocked — everything still lands in the notification centre as usual — and every banner is handed straight back when you switch it off, or when you quit Crest.
+        - generic [ref=f1e130]:
+          - heading "Keeping and deleting your data" [level=3] [ref=f1e131]
+          - generic [ref=f1e132]:
+            - paragraph [ref=f1e133]: Crest keeps what you make until you remove it. There is no retention schedule to describe, because nothing is held anywhere you cannot reach.
+            - paragraph [ref=f1e134]: Notes, reminders and shelved items can be deleted from inside the app. Clipboard history clears itself every time Crest closes. Everything else lives in the app-data folder named above, which you can open and delete by hand. Uninstalling Crest from Windows Settings removes the app and that folder together, along with the startup task if you had it on.
+        - generic [ref=f1e135]:
+          - heading "Children's privacy" [level=3] [ref=f1e136]
+          - paragraph [ref=f1e138]: Crest is a general-purpose desktop utility. It is not directed at children, and it does not knowingly collect information from anyone — children under 13 included — because it does not collect personal information at all.
+        - generic [ref=f1e139]:
+          - heading "Changes to this policy" [level=3] [ref=f1e140]
+          - paragraph [ref=f1e142]:
+            - text: If this policy changes, the new version is posted on this page with a revised effective date at the top. Continuing to use Crest after a change means you accept the revised policy. Because Crest is open source, you can also read the exact change in the
+            - link "repository history" [ref=f1e143] [cursor=pointer]:
+              - /url: https://github.com/LennyDany-03/Dynamic-Notch
+            - text: .
+        - generic [ref=f1e144]:
+          - heading "Contact" [level=3] [ref=f1e145]
+          - paragraph [ref=f1e147]:
+            - text: Questions about this policy, or about how Crest handles anything on your machine, go to
+            - link "lennydany3@gmail.com" [ref=f1e148] [cursor=pointer]:
+              - /url: mailto:lennydany3@gmail.com
+            - text: . Every other way to reach us is on the
+            - link "contact page" [ref=f1e149] [cursor=pointer]:
+              - /url: /contact
+            - text: .
+      - paragraph [ref=f1e150]:
+        - text: Crest is open source under the MIT license. If you would rather check than take our word for it, the entire source — every network call included — is on
+        - link "GitHub" [ref=f1e151] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - text: .
+  - contentinfo [ref=f1e152]:
+    - generic [ref=f1e153]:
+      - generic [ref=f1e154]:
+        - generic [ref=f1e163]: Crest
+        - generic [ref=f1e164]: v0.7.2
+      - navigation "Footer" [ref=f1e165]:
+        - link "Features" [ref=f1e166] [cursor=pointer]:
+          - /url: /#features
+        - link "Privacy" [ref=f1e167] [cursor=pointer]:
+          - /url: /privacy
+        - link "Contact" [ref=f1e168] [cursor=pointer]:
+          - /url: /contact
+        - button "Changelog" [ref=f1e169] [cursor=pointer]
+        - link "GitHub" [ref=f1e170] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - link "Microsoft Store" [ref=f1e171] [cursor=pointer]:
+          - /url: https://apps.microsoft.com/detail/9nr4hxtldn0s
+    - generic [ref=f1e172]:
+      - paragraph [ref=f1e173]: © 2026 Crest. Not affiliated with Microsoft or Apple.
+      - list [ref=f1e174]:
+        - listitem [ref=f1e175]:
+          - link "Crest on Discord" [ref=f1e176] [cursor=pointer]:
+            - /url: https://discord.gg/GYcHnBmuMg
+        - listitem [ref=f1e179]:
+          - link "Crest on GitHub" [ref=f1e180] [cursor=pointer]:
+            - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - listitem [ref=f1e183]:
+          - link "Crest on Discord" [ref=f1e184] [cursor=pointer]:
+            - /url: https://discord.gg/GYcHnBmuMg
+  - button "Open Next.js Dev Tools" [ref=f1e192] [cursor=pointer]

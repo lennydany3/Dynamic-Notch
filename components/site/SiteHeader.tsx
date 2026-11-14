@@ -1,190 +1,69 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import Logo from "./Logo";
-import { Download, ExternalLink } from "./icons";
+import CrestMark from "./CrestMark";
+import SendLink from "./SendLink";
 import { WhatsNewTrigger } from "./WhatsNew";
 import { site } from "@/lib/site";
 
 /**
- * Every in-page target is written root-relative (`/#faq`, not `#faq`) because
- * this header is drawn on `/privacy` and `/contact` too, where a bare fragment
- * resolves against *that* page and goes nowhere. It costs the home page
- * nothing: a link differing from the current URL only in its fragment is a
- * same-document navigation, so `/#faq` still smooth-scrolls from `/` without a
- * reload.
+ * A floating pill rather than a full-width bar: it hangs over the page the way
+ * the notch hangs over a desktop, and it is the first thing on the page that
+ * shows what the product is.
+ *
+ * A Server Component. Every in-page target is root-relative (`/#features`, not
+ * `#features`) because this header is drawn on `/privacy` and `/contact` too,
+ * where a bare fragment resolves against *that* page and goes nowhere. Only two
+ * leaves are client code, both already client components in their own right:
+ * the Changelog trigger and the mobile share button.
  */
-const leftLinks = [{ href: "/#top", label: "See Crest" }];
-const rightLinks = [{ href: "/#faq", label: "FAQ" }];
+const link =
+  "rounded-[var(--r-pill)] px-3 py-2 text-[14px] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text)]";
 
 export default function SiteHeader() {
-  const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [open]);
-
-  const navLink =
-    "text-[13px] tracking-[-0.005em] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text)]";
-
-  const changelogLink = (
-    <WhatsNewTrigger className={navLink}>Changelog</WhatsNewTrigger>
-  );
-
-  const githubLink = (
-    <a
-      href={site.repo}
-      target="_blank"
-      rel="noreferrer noopener"
-      className={`inline-flex items-center gap-1 ${navLink}`}
-    >
-      GitHub
-      <ExternalLink width={11} height={11} />
-    </a>
-  );
-
-  const downloadButton = (
-    <a
-      href={site.download}
-      className="press inline-flex h-9 items-center gap-2 rounded-[var(--r-pill)] bg-[var(--accent)] px-4 text-[13px] font-medium tracking-[-0.005em] text-white transition-colors duration-200 hover:bg-[var(--accent-bright)]"
-    >
-      <Download width={15} height={15} />
-      Download
-    </a>
-  );
-
   return (
-    <header
-      className="glass scroll-edge sticky top-0 z-50"
-      data-scrolled={scrolled || open}
-    >
-      
-      <nav className="mx-auto hidden h-14 max-w-[1080px] grid-cols-[1fr_auto_1fr] items-center gap-6 px-[22px] lg:grid">
-        <div className="flex items-center gap-8 justify-self-center">
-          {leftLinks.map((link) => (
-            <Link key={link.href} href={link.href} className={navLink}>
-              {link.label}
-            </Link>
-          ))}
-          {changelogLink}
-        </div>
-
-        <Link href="/#top" className="shrink-0" aria-label={`${site.name} home`}>
-          <Logo size={24} withWordmark={false} />
-        </Link>
-
-        <div className="flex items-center justify-end gap-8">
-          <div className="flex items-center gap-8">
-            {githubLink}
-            {rightLinks.map((link) => (
-              <Link key={link.href} href={link.href} className={navLink}>
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          {downloadButton}
-        </div>
-      </nav>
-
-      
-      <nav className="mx-auto flex h-14 max-w-[1080px] items-center justify-between gap-6 px-[22px] lg:hidden">
-        <Link href="/#top" className="shrink-0" aria-label={`${site.name} home`}>
-          <Logo size={24} />
-        </Link>
-
-        <div className="flex items-center gap-2">
-          {downloadButton}
-
-          <button
-            type="button"
-            onClick={() => setOpen((value) => !value)}
-            aria-expanded={open}
-            aria-label={open ? "Close menu" : "Open menu"}
-            className="press grid h-9 w-9 place-items-center rounded-[var(--r-pill)] border border-[var(--hairline)] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text)]"
-          >
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              aria-hidden
-            >
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 8h16M4 16h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </nav>
-
-      
-      <div
-        className={`grid overflow-hidden transition-[grid-template-rows] duration-300 ease-[var(--ease-spring)] lg:hidden ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
+    <header className="pointer-events-none fixed inset-x-0 top-3 z-50 flex justify-center px-3">
+      <nav
+        aria-label="Primary"
+        className="pointer-events-auto flex h-[50px] items-center gap-1 rounded-[var(--r-pill)] border border-[var(--hairline)] bg-[rgba(15,15,20,0.82)] pr-1.5 pl-4 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.9)] backdrop-blur-xl"
       >
-        <div className="min-h-0">
-          <ul className="border-t border-[var(--hairline)] px-[22px] py-2">
-            <li>
-              <Link
-                href="/#top"
-                onClick={() => setOpen(false)}
-                className="flex h-11 items-center text-[15px] tracking-[-0.01em] text-[var(--text-body)] transition-colors hover:text-[var(--text)]"
-              >
-                See Crest
-              </Link>
-            </li>
-            <li>
-              <WhatsNewTrigger
-                onClick={() => setOpen(false)}
-                className="flex h-11 w-full items-center text-left text-[15px] tracking-[-0.01em] text-[var(--text-body)] transition-colors hover:text-[var(--text)]"
-              >
-                Changelog
-              </WhatsNewTrigger>
-            </li>
-            <li>
-              <a
-                href={site.repo}
-                target="_blank"
-                rel="noreferrer noopener"
-                onClick={() => setOpen(false)}
-                className="flex h-11 items-center text-[15px] tracking-[-0.01em] text-[var(--text-body)] transition-colors hover:text-[var(--text)]"
-              >
-                GitHub
-              </a>
-            </li>
-            <li>
-              <Link
-                href="/#faq"
-                onClick={() => setOpen(false)}
-                className="flex h-11 items-center text-[15px] tracking-[-0.01em] text-[var(--text-body)] transition-colors hover:text-[var(--text)]"
-              >
-                FAQ
-              </Link>
-            </li>
-          </ul>
+        <Link
+          href="/#top"
+          className="flex items-center gap-2.5 pr-3 text-[var(--text)] no-underline"
+          aria-label={`${site.name} home`}
+        >
+          <CrestMark size={26} />
+          <span className="font-display text-[17px] font-semibold tracking-[-0.02em]">
+            {site.name}
+          </span>
+        </Link>
+
+        <div className="hidden items-center gap-0.5 md:flex">
+          <Link href="/#features" className={link}>
+            Features
+          </Link>
+          <Link href="/privacy" className={link}>
+            Privacy
+          </Link>
+          <WhatsNewTrigger className={`${link} cursor-pointer`}>Changelog</WhatsNewTrigger>
+          <a href={site.repo} target="_blank" rel="noopener noreferrer" className={link}>
+            GitHub
+          </a>
+          <a
+            href={site.store}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pop ml-1.5 flex h-9 items-center rounded-[var(--r-pill)] bg-[var(--text)] px-4 text-[14px] font-semibold text-[#07070a] no-underline"
+          >
+            Get Crest
+          </a>
         </div>
-      </div>
+
+        <SendLink
+          url={site.url}
+          className="ml-1.5 h-9 cursor-pointer rounded-[var(--r-pill)] border-0 bg-[var(--text)] px-4 text-[14px] font-semibold text-[#07070a] md:hidden"
+        >
+          Send link
+        </SendLink>
+      </nav>
     </header>
   );
 }

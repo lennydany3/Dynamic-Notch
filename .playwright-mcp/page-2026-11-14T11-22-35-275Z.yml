@@ -1,0 +1,326 @@
+- generic [active] [ref=f3e1]:
+  - banner:
+    - navigation "Primary" [ref=f3e2]:
+      - link "Crest home" [ref=f3e3] [cursor=pointer]:
+        - /url: /#top
+        - generic [ref=f3e12]: Crest
+      - generic [ref=f3e13]:
+        - link "Features" [ref=f3e14] [cursor=pointer]:
+          - /url: /#features
+        - link "Privacy" [ref=f3e15] [cursor=pointer]:
+          - /url: /privacy
+        - button "Changelog" [ref=f3e16] [cursor=pointer]
+        - link "GitHub" [ref=f3e17] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - link "Get Crest" [ref=f3e18] [cursor=pointer]:
+          - /url: https://apps.microsoft.com/detail/9nr4hxtldn0s
+  - main [ref=f3e19]:
+    - generic [ref=f3e20]:
+      - heading "Everything, one notch away." [level=1] [ref=f3e63]
+      - paragraph [ref=f3e64]: Crest turns the top of your Windows 11 screen into a living notch for notifications, media, files and quick tools. Free.
+      - generic [ref=f3e66]:
+        - link "Get it from Microsoft Store" [ref=f3e67] [cursor=pointer]:
+          - /url: https://apps.microsoft.com/detail/9nr4hxtldn0s
+          - generic [ref=f3e75]:
+            - generic [ref=f3e76]: Get it from
+            - generic [ref=f3e77]: Microsoft Store
+        - link "Download installer GitHub · ~5 MB" [ref=f3e78] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch/releases/download/v0.7.2/Crest_0.7.2_x64-setup.exe
+          - generic [ref=f3e81]: Download installer
+          - generic [ref=f3e82]: GitHub · ~5 MB
+      - paragraph [ref=f3e83]: Free · Windows 11 · v0.7.2
+    - region "The notch, live" [ref=f3e84]:
+      - generic [ref=f3e86]:
+        - generic [ref=f3e87]:
+          - generic [ref=f3e88]: THE NOTCH, LIVE
+          - heading "It changes shape for whatever needs you." [level=2] [ref=f3e89]
+        - generic [ref=f3e90]:
+          - generic [ref=f3e91]:
+            - generic [ref=f3e92]:
+              - generic [ref=f3e93]:
+                - generic [ref=f3e94]: 01 / 06
+                - heading "Idle" [level=3] [ref=f3e95]
+                - paragraph [ref=f3e96]: A small black pill at the top edge. It stays clear of your taskbar, Alt-Tab and every window.
+              - generic [aria-hidden] [ref=f3e97]:
+                - generic [ref=f3e98]: 02 / 06
+                - heading [level=3] [ref=f3e99]: A notification arrives
+                - paragraph [ref=f3e100]: The pill stretches, the app icon slides in and the message plays out inside the notch. Then it settles back.
+              - generic [aria-hidden] [ref=f3e101]:
+                - generic [ref=f3e102]: 03 / 06
+                - heading [level=3] [ref=f3e103]: Media playing
+                - paragraph [ref=f3e104]: Album art, a live waveform and play/pause. Skip a track without finding the window.
+              - generic [aria-hidden] [ref=f3e105]:
+                - generic [ref=f3e106]: 04 / 06
+                - heading [level=3] [ref=f3e107]: Weather
+                - paragraph [ref=f3e108]: Temperature and conditions from Open-Meteo, for a place you typed in yourself.
+              - generic [aria-hidden] [ref=f3e109]:
+                - generic [ref=f3e110]: 05 / 06
+                - heading [level=3] [ref=f3e111]: Your next event
+                - paragraph [ref=f3e112]: A countdown to what's next, so a reminder never arrives as a surprise.
+              - generic [aria-hidden] [ref=f3e113]:
+                - generic [ref=f3e114]: 06 / 06
+                - heading [level=3] [ref=f3e115]: File Shelf
+                - paragraph [ref=f3e116]: Drag a file up and the pill takes it. Drag it out again when you know where it goes.
+            - generic [ref=f3e117]:
+              - 'button "Show: Idle" [ref=f3e118] [cursor=pointer]'
+              - 'button "Show: A notification arrives" [ref=f3e120] [cursor=pointer]'
+              - 'button "Show: Media playing" [ref=f3e122] [cursor=pointer]'
+              - 'button "Show: Weather" [ref=f3e124] [cursor=pointer]'
+              - 'button "Show: Your next event" [ref=f3e126] [cursor=pointer]'
+              - 'button "Show: File Shelf" [ref=f3e128] [cursor=pointer]'
+          - generic [ref=f3e132]:
+            - generic [ref=f3e134]: Documents
+            - generic [ref=f3e149]: notes.md
+            - generic [aria-hidden]:
+              - generic:
+                - generic:
+                  - generic: Riya
+                  - generic: Messages · now
+                - generic: Pushed the build. v0.7.2 is live.
+            - generic [aria-hidden]:
+              - generic:
+                - generic: Low Tide
+                - generic: Halden
+                - generic:
+                  - generic: 1:12
+                  - generic: 3:40
+            - generic [aria-hidden]:
+              - generic: 18°
+              - generic:
+                - generic: Partly cloudy
+                - generic: Bengaluru · H 24° L 17°
+            - generic [aria-hidden]:
+              - generic:
+                - generic: NOV
+                - generic: "14"
+              - generic:
+                - generic: Design review
+                - generic: Room 2 · 30 min
+              - generic:
+                - generic: STARTS IN
+                - generic: 11:42
+            - generic [aria-hidden]:
+              - generic: Drop to File Shelf
+            - generic [aria-hidden]:
+              - generic:
+                - generic: FILE SHELF
+                - generic: 3 ITEMS
+              - generic:
+                - generic: brief.pdf
+                - generic: notch.png
+                - generic: build.zip
+    - generic [ref=f3e164]:
+      - generic [ref=f3e165]:
+        - generic [ref=f3e166]: Features
+        - heading "What lives in the notch." [level=2] [ref=f3e167]
+        - paragraph [ref=f3e168]: Each one opens from the same pill. Keep the ones you use and switch off the rest.
+      - generic [ref=f3e169]:
+        - article [ref=f3e170]:
+          - img [aria-hidden] [ref=f3e172]:
+            - generic [ref=f3e176]:
+              - generic [ref=f3e180]: Riya
+              - generic [ref=f3e181]: Pushed the build. v0.7.2 is live.
+              - generic [ref=f3e182]: now
+          - generic [ref=f3e183]:
+            - heading "Notifications in the notch" [level=3] [ref=f3e184]
+            - paragraph [ref=f3e185]: Windows notifications land in the pill first, then file themselves away.
+        - article [ref=f3e186]:
+          - img [aria-hidden] [ref=f3e188]:
+            - generic [ref=f3e194]: Low Tide
+            - generic [ref=f3e195]: Halden
+            - generic [ref=f3e209]: 1:12
+            - generic [ref=f3e210]: 3:40
+          - generic [ref=f3e216]:
+            - heading "Media controls" [level=3] [ref=f3e217]
+            - paragraph [ref=f3e218]: See what's playing, scrub and skip without finding the window.
+      - generic [ref=f3e219]:
+        - article [ref=f3e220]:
+          - img [aria-hidden] [ref=f3e222]:
+            - generic [ref=f3e224]: PDF
+            - generic [ref=f3e227]: PNG
+            - generic [ref=f3e230]: ZIP
+            - generic [ref=f3e233]: FILE SHELF · 3
+          - generic [ref=f3e234]:
+            - heading "File Shelf" [level=3] [ref=f3e235]
+            - paragraph [ref=f3e236]: Drag a file up to the notch. Drop it somewhere else later.
+        - article [ref=f3e237]:
+          - img [aria-hidden] [ref=f3e239]:
+            - generic [ref=f3e240]: "#5B4DFF"
+            - generic [ref=f3e244]:
+              - generic [ref=f3e246]: Meet at 4:30
+              - generic [ref=f3e247]: near the café
+            - generic [ref=f3e248]:
+              - generic [ref=f3e250]: COPIED
+              - generic [ref=f3e251]: npm run build
+            - generic [ref=f3e253]: memory-only
+          - generic [ref=f3e254]:
+            - heading "Clipboard history" [level=3] [ref=f3e255]
+            - paragraph [ref=f3e256]: Memory-only, pauses while your password manager is focused.
+        - article [ref=f3e257]:
+          - img [aria-hidden] [ref=f3e259]:
+            - generic [ref=f3e261]: QUICK NOTE
+            - generic [ref=f3e262]:
+              - generic [ref=f3e263]: Ask Riya about the
+              - generic [ref=f3e266]: launch post copy
+            - generic [ref=f3e269]: Saved locally
+          - generic [ref=f3e270]:
+            - heading "Quick Notes" [level=3] [ref=f3e271]
+            - paragraph [ref=f3e272]: Type a thought before it's gone. No app to open first.
+      - generic [ref=f3e273]:
+        - article [ref=f3e274]:
+          - img [aria-hidden] [ref=f3e276]:
+            - generic [ref=f3e296]: 3 RECENT
+          - generic [ref=f3e297]:
+            - heading "Screenshots" [level=3] [ref=f3e298]
+            - paragraph [ref=f3e299]: Recent shots slide into the notch as thumbnails.
+        - article [ref=f3e300]:
+          - img [aria-hidden] [ref=f3e302]:
+            - generic [ref=f3e305]: NOV
+            - generic [ref=f3e306]: "14"
+            - generic [ref=f3e307]: Design review
+            - generic [ref=f3e308]: in 12 min
+            - generic [ref=f3e312]:
+              - generic [ref=f3e314]: M
+              - generic [ref=f3e315]: "9"
+            - generic [ref=f3e316]:
+              - generic [ref=f3e318]: T
+              - generic [ref=f3e319]: "10"
+            - generic [ref=f3e320]:
+              - generic [ref=f3e322]: W
+              - generic [ref=f3e323]: "11"
+            - generic [ref=f3e324]:
+              - generic [ref=f3e326]: T
+              - generic [ref=f3e327]: "12"
+            - generic [ref=f3e328]:
+              - generic [ref=f3e330]: F
+              - generic [ref=f3e331]: "13"
+            - generic [ref=f3e332]:
+              - generic [ref=f3e334]: S
+              - generic [ref=f3e335]: "14"
+            - generic [ref=f3e336]:
+              - generic [ref=f3e338]: S
+              - generic [ref=f3e339]: "15"
+          - generic [ref=f3e340]:
+            - heading "Calendar & reminders" [level=3] [ref=f3e341]
+            - paragraph [ref=f3e342]: Your next event and a countdown, before the reminder interrupts you.
+        - article [ref=f3e343]:
+          - img [aria-hidden] [ref=f3e345]:
+            - generic [ref=f3e346]: CPU
+            - generic [ref=f3e347]: 23%
+            - generic [ref=f3e348]: LIVE
+            - generic [ref=f3e353]: RAM
+            - generic [ref=f3e356]: 10.2 / 16 GB
+          - generic [ref=f3e357]:
+            - heading "System monitor" [level=3] [ref=f3e358]
+            - paragraph [ref=f3e359]: Live CPU and RAM, read from the same counters as Task Manager.
+      - generic [ref=f3e360]:
+        - article [ref=f3e361]:
+          - img [aria-hidden] [ref=f3e363]:
+            - generic [ref=f3e368]: Speakers
+            - generic [ref=f3e369]: OUT
+            - generic [ref=f3e371]: Headset mic
+            - generic [ref=f3e372]: IN
+          - generic [ref=f3e373]:
+            - heading "Audio Quick Access" [level=3] [ref=f3e374]
+            - paragraph [ref=f3e375]: Switch speakers and mic from the top of the screen.
+        - article [ref=f3e376]:
+          - img [aria-hidden] [ref=f3e378]:
+            - generic [ref=f3e386]: Headphones
+          - generic [ref=f3e387]:
+            - heading "Bluetooth status" [level=3] [ref=f3e388]
+            - paragraph [ref=f3e389]: See what's connected at a glance.
+        - article [ref=f3e390]:
+          - img [aria-hidden] [ref=f3e392]:
+            - generic [ref=f3e405]: 18°
+            - generic [ref=f3e406]: Partly cloudy
+            - generic [ref=f3e407]: BENGALURU
+          - generic [ref=f3e408]:
+            - heading "Weather" [level=3] [ref=f3e409]
+            - paragraph [ref=f3e410]: Forecast from Open-Meteo for the town you typed in.
+        - article [ref=f3e411]:
+          - img [aria-hidden] [ref=f3e413]:
+            - generic [ref=f3e422]: Start with Windows
+          - generic [ref=f3e423]:
+            - heading "Launches with Windows" [level=3] [ref=f3e424]
+            - paragraph [ref=f3e425]: Starts with Windows, then stays out of the way.
+    - generic [ref=f3e427]:
+      - generic [ref=f3e428]:
+        - generic [ref=f3e429]: Privacy
+        - heading "Three network calls. That's all." [level=2] [ref=f3e430]
+      - generic [ref=f3e431]:
+        - generic [ref=f3e432]:
+          - code [ref=f3e433]: api.open-meteo.com
+          - generic [ref=f3e438]: weather forecast
+        - generic [ref=f3e440]:
+          - code [ref=f3e441]: geocoding-api.open-meteo.com
+          - generic [ref=f3e446]: location search
+        - generic [ref=f3e448]:
+          - code [ref=f3e449]: GitHub latest.json
+          - generic [ref=f3e454]:
+            - generic [ref=f3e455]: update check
+            - generic [ref=f3e456]: off entirely in the Store version
+      - generic [ref=f3e457]:
+        - paragraph [ref=f3e458]: No accounts. No analytics. Clipboard never leaves memory.
+        - link "Read the full Privacy Policy" [ref=f3e459] [cursor=pointer]:
+          - /url: /privacy
+    - generic [ref=f3e467]:
+      - generic [ref=f3e468]:
+        - generic [ref=f3e469]:
+          - generic [ref=f3e470]: Built in public
+          - heading "Made by Lenny Dany Derek D." [level=2] [ref=f3e471]
+        - generic [ref=f3e472]:
+          - link "GitHub releases" [ref=f3e473] [cursor=pointer]:
+            - /url: https://github.com/LennyDany-03/Dynamic-Notch/releases
+          - button "Changelog" [ref=f3e476] [cursor=pointer]
+      - generic [ref=f3e479]:
+        - generic [ref=f3e481]: v0.6
+        - generic [ref=f3e486]: v0.7
+        - generic [ref=f3e491]:
+          - generic [ref=f3e495]: v0.7.2
+          - generic [ref=f3e496]: Current
+        - generic [ref=f3e497]:
+          - generic [ref=f3e501]: Microsoft Store
+          - generic [ref=f3e502]: Live as Crest Notch
+    - generic [ref=f3e503]:
+      - heading "Get Crest. It's free." [level=2] [ref=f3e546]
+      - generic [ref=f3e548]:
+        - link "Get it from Microsoft Store" [ref=f3e549] [cursor=pointer]:
+          - /url: https://apps.microsoft.com/detail/9nr4hxtldn0s
+          - generic [ref=f3e557]:
+            - generic [ref=f3e558]: Get it from
+            - generic [ref=f3e559]: Microsoft Store
+        - link "Download installer GitHub · ~5 MB" [ref=f3e560] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch/releases/download/v0.7.2/Crest_0.7.2_x64-setup.exe
+          - generic [ref=f3e563]: Download installer
+          - generic [ref=f3e564]: GitHub · ~5 MB
+      - paragraph [ref=f3e565]: Free · Windows 11 · v0.7.2
+  - contentinfo [ref=f3e566]:
+    - generic [ref=f3e567]:
+      - generic [ref=f3e568]:
+        - generic [ref=f3e577]: Crest
+        - generic [ref=f3e578]: v0.7.2
+      - navigation "Footer" [ref=f3e579]:
+        - link "Features" [ref=f3e580] [cursor=pointer]:
+          - /url: /#features
+        - link "Privacy" [ref=f3e581] [cursor=pointer]:
+          - /url: /privacy
+        - link "Contact" [ref=f3e582] [cursor=pointer]:
+          - /url: /contact
+        - button "Changelog" [ref=f3e583] [cursor=pointer]
+        - link "GitHub" [ref=f3e584] [cursor=pointer]:
+          - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - link "Microsoft Store" [ref=f3e585] [cursor=pointer]:
+          - /url: https://apps.microsoft.com/detail/9nr4hxtldn0s
+    - generic [ref=f3e586]:
+      - paragraph [ref=f3e587]: © 2026 Crest. Not affiliated with Microsoft or Apple.
+      - list [ref=f3e588]:
+        - listitem [ref=f3e589]:
+          - link "Crest on Discord" [ref=f3e590] [cursor=pointer]:
+            - /url: https://discord.gg/GYcHnBmuMg
+        - listitem [ref=f3e593]:
+          - link "Crest on GitHub" [ref=f3e594] [cursor=pointer]:
+            - /url: https://github.com/LennyDany-03/Dynamic-Notch
+        - listitem [ref=f3e597]:
+          - link "Crest on Discord" [ref=f3e598] [cursor=pointer]:
+            - /url: https://discord.gg/GYcHnBmuMg
+  - button "Open Next.js Dev Tools" [ref=f3e606] [cursor=pointer]

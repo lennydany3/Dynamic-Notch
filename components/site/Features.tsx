@@ -1,130 +1,106 @@
-import Reveal from "./Reveal";
+import type { ReactNode } from "react";
+import SectionHeading from "./SectionHeading";
 import {
-  Bell,
-  Calendar,
-  Clipboard,
-  Clock,
-  Cloud,
-  Files,
-  Gauge,
-  Ghost,
-  Grid,
-  Music,
-  Note,
-} from "./icons";
+  AudioScene,
+  AutostartScene,
+  BluetoothScene,
+  CalendarScene,
+  ClipboardScene,
+  MediaScene,
+  NotesScene,
+  NotificationScene,
+  ScreenshotsScene,
+  ShelfScene,
+  SystemScene,
+  WeatherScene,
+} from "./illustrations";
 
-const features = [
-  {
-    icon: Music,
-    title: "Now playing",
-    body: "A track starts. Skip it without touching the taskbar.",
-  },
-  {
-    icon: Grid,
-    title: "Quick launcher",
-    body: "You need an app right now. Type three letters, it's open.",
-  },
-  {
-    icon: Files,
-    title: "File shelf",
-    body: "A file needs to go somewhere else first. Drag it up, drop it later.",
-  },
-  {
-    icon: Bell,
-    title: "Notifications",
-    body: "Something lands in the Action Center. It surfaces here first, then files itself away.",
-  },
-  {
-    icon: Gauge,
-    title: "System monitor",
-    body: "The fan kicks in. Check what's actually using the CPU before you blame Chrome.",
-  },
-  {
-    icon: Cloud,
-    title: "Weather",
-    body: "You're deciding on a jacket. It's already answered.",
-  },
-  {
-    icon: Calendar,
-    title: "Calendar",
-    body: "A reminder's about to fire. You see it before it interrupts you.",
-  },
-  {
-    icon: Note,
-    title: "Quick notes",
-    body: "A thought worth keeping. Type it before it's gone. No app to open first.",
-  },
-  {
-    icon: Clipboard,
-    title: "Clipboard history",
-    body: "You copied the wrong thing two steps ago. It's still in there.",
-  },
-  {
-    icon: Clock,
-    title: "A clock at rest",
-    body: "You just want the time. That's all it shows until you ask for more.",
-  },
-  {
-    icon: Ghost,
-    title: "Invisible when idle",
-    body: "You're not touching it. It's not touching your taskbar, Alt-Tab, or anything else.",
-  },
+/**
+ * "What lives in the notch": a bento of live pictures. Every card is a Server
+ * Component holding an SVG scene whose loops are pure CSS, so the whole
+ * section is in the HTML the server sends and animates with no script.
+ *
+ * The four rows differ in density, not in kind: each row is a flex-wrap line
+ * whose cards carry a flex-grow ratio, so the grid reflows from a 7:5 pair
+ * down to a single column without a breakpoint list.
+ */
+type Size = "xl" | "lg" | "md" | "sm";
+
+const SIZES: Record<Size, { art: string; pad: string; title: string; text: string }> = {
+  xl: { art: "h-[250px] px-5", pad: "px-[26px] pt-[22px] pb-[26px]", title: "text-[21px]", text: "text-[15px]" },
+  lg: { art: "h-[210px] px-4", pad: "px-6 pt-5 pb-6", title: "text-[20px]", text: "text-[15px]" },
+  md: { art: "h-[210px] px-4", pad: "px-6 pt-5 pb-6", title: "text-[20px]", text: "text-[15px]" },
+  sm: { art: "h-[170px] px-3", pad: "px-[22px] pt-[18px] pb-[22px]", title: "text-[19px]", text: "text-[14px]" },
+};
+
+type Feature = {
+  title: string;
+  text: string;
+  art: ReactNode;
+  size: Size;
+  flex: string;
+};
+
+const rows: Feature[][] = [
+  [
+    { title: "Notifications in the notch", text: "Windows notifications land in the pill first, then file themselves away.", art: <NotificationScene />, size: "xl", flex: "7 1 440px" },
+    { title: "Media controls", text: "See what's playing, scrub and skip without finding the window.", art: <MediaScene />, size: "xl", flex: "5 1 320px" },
+  ],
+  [
+    { title: "File Shelf", text: "Drag a file up to the notch. Drop it somewhere else later.", art: <ShelfScene />, size: "lg", flex: "1 1 300px" },
+    { title: "Clipboard history", text: "Memory-only, pauses while your password manager is focused.", art: <ClipboardScene />, size: "lg", flex: "1 1 300px" },
+    { title: "Quick Notes", text: "Type a thought before it's gone. No app to open first.", art: <NotesScene />, size: "lg", flex: "1 1 300px" },
+  ],
+  [
+    { title: "Screenshots", text: "Recent shots slide into the notch as thumbnails.", art: <ScreenshotsScene />, size: "md", flex: "4 1 280px" },
+    { title: "Calendar & reminders", text: "Your next event and a countdown, before the reminder interrupts you.", art: <CalendarScene />, size: "md", flex: "3 1 260px" },
+    { title: "System monitor", text: "Live CPU and RAM, read from the same counters as Task Manager.", art: <SystemScene />, size: "md", flex: "5 1 300px" },
+  ],
+  [
+    { title: "Audio Quick Access", text: "Switch speakers and mic from the top of the screen.", art: <AudioScene />, size: "sm", flex: "1 1 230px" },
+    { title: "Bluetooth status", text: "See what's connected at a glance.", art: <BluetoothScene />, size: "sm", flex: "1 1 230px" },
+    { title: "Weather", text: "Forecast from Open-Meteo for the town you typed in.", art: <WeatherScene />, size: "sm", flex: "1 1 230px" },
+    { title: "Launches with Windows", text: "Starts with Windows, then stays out of the way.", art: <AutostartScene />, size: "sm", flex: "1 1 230px" },
+  ],
 ];
+
+function FeatureCard({ title, text, art, size, flex }: Feature) {
+  const s = SIZES[size];
+  return (
+    <article
+      data-play
+      data-reveal
+      className="feature-card flex min-w-0 flex-col overflow-hidden rounded-[28px] border border-[var(--hairline)] bg-[var(--surface)]"
+      style={{ flex }}
+    >
+      <div className={`border-b border-[rgba(255,255,255,0.06)] bg-[#0b0b10] ${s.art}`}>{art}</div>
+      <div className={`flex flex-col gap-1.5 ${s.pad}`}>
+        <h3 className={`m-0 font-display font-semibold tracking-[-0.02em] ${s.title}`}>{title}</h3>
+        <p className={`m-0 leading-[1.5] text-pretty text-[var(--text-secondary)] ${s.text}`}>{text}</p>
+      </div>
+    </article>
+  );
+}
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-[clamp(56px,9vw,104px)]">
-      <div className="mx-auto max-w-[1080px] px-[22px]">
-        <div className="max-w-2xl">
-          <p className="t-eyebrow">Panels</p>
-          <h2 className="t-title mt-3">
-            See what&rsquo;s happening
-            <span className="text-[var(--heading-tint)]"> without losing focus.</span>
-          </h2>
-          <p className="t-lede mt-5">
-            Seven panels, each a page of the same card. Arrows or a scroll move
-            between them and it morphs to fit. Keep the ones you use, drag them
-            into the order you want.
-          </p>
-        </div>
+    <section id="features" className="px-6 py-[clamp(96px,12vw,160px)]">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-4">
+        <SectionHeading
+          eyebrow="Features"
+          className="mb-10"
+          lede="Each one opens from the same pill. Keep the ones you use and switch off the rest."
+        >
+          What lives in the notch.
+        </SectionHeading>
 
-        
-        <div className="panel mt-11 overflow-hidden">
-          <div className="grid gap-px bg-[var(--hairline)] sm:grid-cols-2 lg:grid-cols-3">
-            {features.map(({ icon: Icon, title, body }, i) => (
-              <Reveal
-                key={title}
-                
-                delay={(i % 3) * 55}
-                className="bg-[var(--surface)]"
-              >
-                <article className="group flex h-full gap-4 px-6 py-6 transition-colors duration-200 hover:bg-[var(--surface-raised)]">
-                  
-                  <span className="mt-0.5 shrink-0 text-[var(--text-tertiary)] transition-colors duration-200 group-hover:text-[var(--accent-bright)]">
-                    <Icon width={20} height={20} />
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="t-heading">{title}</h3>
-                    <p className="mt-1 text-[13.5px] leading-[1.6] text-[var(--text-secondary)]">
-                      {body}
-                    </p>
-                  </div>
-                </article>
-              </Reveal>
+        {rows.map((row, i) => (
+          <div key={i} className="flex flex-wrap gap-4">
+            {row.map((feature) => (
+              <FeatureCard key={feature.title} {...feature} />
             ))}
-            
-            <div aria-hidden className="hidden bg-[var(--surface)] sm:block" />
           </div>
-        </div>
-
-        
-        <Reveal delay={120}>
-          <p className="mx-auto mt-7 max-w-xl text-center text-[13.5px] leading-[1.7] text-[var(--text-tertiary)]">
-            And some things never wait to be asked for: a track starting, a
-            notification landing, a reminder falling due, a charger going in, or
-            your machine struggling.
-          </p>
-        </Reveal>
+        ))}
       </div>
     </section>
   );

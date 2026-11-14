@@ -3,56 +3,49 @@
 :root {
   color-scheme: dark;
 
-  
-  --ground: #050508;
-  --surface: #0f0f13;
-  --surface-raised: #16161b;
-  --surface-hover: #1b1b21;
+  /* Crest v2 palette, transcribed from the design export. Token NAMES are
+     unchanged so the legal pages (which read them) restyle without edits. */
+  --ground: #07070a;
+  --surface: #0f0f14;
+  --surface-raised: #16161d;
+  --surface-hover: #1b1b24;
 
-  
   --hairline: rgba(255, 255, 255, 0.08);
   --hairline-strong: rgba(255, 255, 255, 0.14);
 
-  
   --text: #f5f5f7;
-  --text-body: #c9c9ce;
-  --text-secondary: #98989d;
-  --text-tertiary: #7d7d82;
-  --text-faint: #5a5a60;
+  --text-body: #c9c9d1;
+  --text-secondary: #8a8a96;
+  --text-tertiary: #7a7a86;
+  --text-faint: #5a5a66;
 
-  
-  --accent: #2f6fed;
-  --accent-bright: #5b90f5;
-  
-  --indigo: #123a9e;
-  
+  --accent: #5b4dff;
+  --accent-bright: #8c82ff;
+  --brand: #1800ad;
+  --indigo: #1800ad;
   --discord: #5865f2;
-  --heading-tint: color-mix(in srgb, #295fcc 55%, white);
+  --heading-tint: #8c82ff;
 
-  
-  --track: #2a2a30;
+  --track: #2a2a34;
 
-  
   --r-pill: 999px;
   --r-chip: 6px;
   --r-thumb: 12px;
   --r-sheet: 16px;
   --r-card: 18px;
   --r-panel: 22px;
-  --r-hero: 26px;
+  --r-hero: 28px;
 
-  
   --sh-card: 0 1px 2px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.32);
   --sh-panel: 0 1px 3px rgba(0, 0, 0, 0.55), 0 18px 48px rgba(0, 0, 0, 0.4);
   --sh-lift: 0 2px 6px rgba(0, 0, 0, 0.5), 0 16px 40px rgba(0, 0, 0, 0.5);
-  --sh-cta: 0 2px 8px rgba(0, 0, 0, 0.4), 0 22px 60px rgba(47, 111, 237, 0.34);
+  --sh-cta: 0 2px 8px rgba(0, 0, 0, 0.4), 0 22px 60px rgba(91, 77, 255, 0.34);
   --sh-overlay: 0 2px 8px rgba(0, 0, 0, 0.6), 0 34px 90px rgba(0, 0, 0, 0.7);
 
-  
   --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.4, 0.64, 1);
 
-  
   --background: var(--ground);
   --foreground: var(--text);
   --muted: var(--text-body);
@@ -68,8 +61,9 @@
   --color-muted: var(--text-body);
   --color-faint: var(--text-tertiary);
   --color-hairline: var(--hairline);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-display: var(--font-familjen), var(--font-instrument), system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
 }
 
 html {
@@ -84,16 +78,14 @@ body {
   background: var(--ground);
   color: var(--text);
   
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    "Segoe UI Variable Text", "Segoe UI", var(--font-geist-sans), "Helvetica Neue",
-    system-ui, sans-serif;
+  font-family: var(--font-instrument), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(47, 111, 237, 0.4);
+  background: var(--brand);
 }
 
 :where(a, button, summary, [tabindex]):focus-visible {
@@ -202,59 +194,6 @@ body {
 .scroll-edge[data-scrolled="true"] {
   border-bottom-color: var(--hairline);
   box-shadow: 0 1px 16px rgba(0, 0, 0, 0.5);
-}
-
-.parallax-bg {
-  z-index: 0;
-  perspective: 1400px;
-}
-
-.parallax-bg__stage {
-  position: absolute;
-  inset: -10%;
-  transform-style: preserve-3d;
-  transform: rotateX(calc(var(--py) * -5deg)) rotateY(calc(var(--px) * 6deg));
-  will-change: transform;
-}
-
-.parallax-bg__orbit {
-  position: absolute;
-  transform: translate3d(
-    calc(var(--px) * var(--depth) * 90px),
-    calc(var(--py) * var(--depth) * 90px - var(--pscroll) * var(--depth) * 220px),
-    calc(var(--depth) * -220px)
-  );
-  will-change: transform;
-}
-
-.parallax-bg__drift {
-  animation-name: parallax-drift;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-.parallax-bg__orb {
-  border-radius: 50%;
-  transform: translate3d(-50%, -50%, 0);
-}
-
-@keyframes parallax-drift {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(var(--drift-x), var(--drift-y), 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .parallax-bg__stage,
-  .parallax-bg__orbit,
-  .parallax-bg__drift {
-    transform: none !important;
-    animation: none !important;
-  }
 }
 
 .mica {
@@ -469,9 +408,6 @@ body {
     -webkit-backdrop-filter: none;
   }
 
-  .parallax-bg {
-    display: none;
-  }
 }
 
 @media (prefers-contrast: more) {

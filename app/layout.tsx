@@ -1,17 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Familjen_Grotesk, Instrument_Sans, Martian_Mono } from "next/font/google";
 import { site } from "@/lib/site";
-import ParallaxBackground from "@/components/site/ParallaxBackground";
 import "./globals.css";
+import "./home.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/* Display, body and mono: the three voices of the v2 design. Self-hosted by
+   next/font, so the server-rendered HTML ships with the font already resolved. */
+const familjen = Familjen_Grotesk({
+  variable: "--font-familjen",
   subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const instrument = Instrument_Sans({
+  variable: "--font-instrument",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const martian = Martian_Mono({
+  variable: "--font-martian",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -54,7 +67,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050508",
+  themeColor: "#07070a",
   colorScheme: "dark",
 };
 
@@ -62,10 +75,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${familjen.variable} ${instrument.variable} ${martian.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ParallaxBackground />
         {children}
       </body>
     </html>
