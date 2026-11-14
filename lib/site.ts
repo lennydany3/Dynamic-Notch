@@ -55,6 +55,8 @@ export const site = {
    */
   download: `${repo}/releases/download/v${version}/Crest_${version}_x64-setup.exe`,
   releases: `${repo}/releases`,
+  /** The Microsoft Store listing ("Crest Notch"): the primary install path. */
+  store: "https://apps.microsoft.com/detail/9nr4hxtldn0s",
   author: "LennyDany-03",
   authorUrl: "https://github.com/LennyDany-03",
   /**

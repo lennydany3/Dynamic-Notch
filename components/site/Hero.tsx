@@ -1,97 +1,53 @@
-import Button from "./Button";
-import NotchDemo from "./NotchDemo";
-import { Download, Play, Windows } from "./icons";
-import { WhatsNewTrigger } from "./WhatsNew";
+import DownloadButtons from "./DownloadButtons";
+import Mark3D from "./Mark3D";
 import { site } from "@/lib/site";
 
-const facts = [
-  ["600ms", "Typical response time"],
-  ["7", "Built-in modules"],
-  ["0", "Accounts required"],
-  ["MIT", "Open-source license"],
-];
-
+/**
+ * The first screen: the mark as an object, one line, one sentence, two ways to
+ * install. Server-rendered in full, including the extruded mark, whose only
+ * script is the pointer-follow inside <Mark3D>.
+ *
+ * The h1 is plain text in the document (the 3D mark is decorative and hidden
+ * from assistive tech), which is what a crawler and a screen reader get first.
+ */
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden pt-16 pb-[clamp(56px,9vw,96px)]">
-      <div className="relative mx-auto max-w-[1080px] px-[22px]">
-        <div className="mx-auto max-w-3xl text-center">
-          
-          <WhatsNewTrigger className="rise press group inline-flex items-center gap-2 rounded-[var(--r-pill)] border border-[var(--hairline)] bg-[var(--surface)] py-1.5 pr-4 pl-1.5 text-[13px] tracking-[-0.005em] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--hairline-strong)] hover:text-[var(--text)]">
-            <span className="tnum rounded-[var(--r-pill)] bg-[var(--accent)] px-2.5 py-0.5 text-[11.5px] font-semibold text-white">
-              v{site.version}
-            </span>
-            See what&rsquo;s new
-          </WhatsNewTrigger>
+    <section
+      id="top"
+      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pt-24 pb-16 text-center"
+    >
+      {/* Ambient light: an indigo pool behind the mark and a faint vignette,
+          so the dark ground has depth without a single image request. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 50% 30%, rgba(91,77,255,0.16), rgba(91,77,255,0) 70%), radial-gradient(90% 60% at 50% 110%, rgba(24,0,173,0.22), rgba(24,0,173,0) 70%)",
+        }}
+      />
 
-          <h1 className="rise t-display mt-8 text-[var(--text)]" style={{ animationDelay: "60ms" }}>
-            The space at the top
-            <br />
-            of your screen{" "}
-            
-            <span className="text-[var(--heading-tint)]">
-              finally{" "}
-              <br className="hidden sm:inline" />
-              does something.
-            </span>
-          </h1>
-
-          
-          <p
-            className="rise t-lede mx-auto mt-6 max-w-[34rem]"
-            style={{ animationDelay: "140ms" }}
-          >
-            Crest turns that dead strip above your desktop into a small panel.
-            Music, a timer, your battery, a notification. It shows up when one
-            of those needs you, and gets out of the way the second it doesn&rsquo;t.
-          </p>
-
-          <div
-            className="rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
-            style={{ animationDelay: "220ms" }}
-          >
-            <Button href={site.download} size="lg" external={false}>
-              <Download width={18} height={18} />
-              Try Crest for Windows
-            </Button>
-            
-            <Button href="#preview" variant="secondary" size="lg" external={false}>
-              <Play width={16} height={16} />
-              See it in action
-            </Button>
-          </div>
-
-          <p
-            className="rise mt-5 flex items-center justify-center gap-2 text-[13px] text-[var(--text-tertiary)]"
-            style={{ animationDelay: "300ms" }}
-          >
-            <Windows width={14} height={14} />
-            Free for Windows 10 &amp; 11 · No account required
-          </p>
-        </div>
-
-        <div
-          id="preview"
-          className="rise mt-[clamp(48px,7vw,72px)] scroll-mt-24"
-          style={{ animationDelay: "380ms" }}
-        >
-          <NotchDemo />
-        </div>
-
-        <dl
-          className="rise panel mx-auto mt-[clamp(40px,6vw,64px)] flex max-w-2xl flex-col divide-y divide-[var(--hairline)] sm:flex-row sm:divide-x sm:divide-y-0"
-          style={{ animationDelay: "460ms" }}
-        >
-          {facts.map(([value, label]) => (
-            <div key={label} className="flex-1 px-6 py-7 text-center">
-              <dt className="tnum text-[28px] leading-none font-semibold tracking-[-0.03em] text-[var(--text)]">
-                {value}
-              </dt>
-              <dd className="mt-2 text-[13px] text-[var(--text-tertiary)]">{label}</dd>
-            </div>
-          ))}
-        </dl>
+      <div className="relative flex h-[clamp(290px,44vh,430px)] w-full max-w-[640px] items-center justify-center">
+        <Mark3D />
       </div>
+
+      <h1 className="rise relative mt-2 max-w-[12ch] font-display text-[clamp(46px,8vw,108px)] leading-[0.96] font-semibold tracking-[-0.045em] text-balance">
+        Everything, one notch away.
+      </h1>
+
+      <p
+        className="rise relative mt-6 max-w-[560px] text-[clamp(17px,1.6vw,20px)] leading-[1.5] text-pretty text-[var(--text-secondary)]"
+        style={{ animationDelay: "90ms" }}
+      >
+        Crest turns the top of your Windows 11 screen into a living notch for
+        notifications, media, files and quick tools. Free.
+      </p>
+
+      <DownloadButtons className="rise relative mt-9" />
+
+      <p className="relative mt-[22px] font-mono text-[11px] tracking-[0.02em] text-[var(--text-secondary)]">
+        Free · Windows 11 · v{site.version}
+      </p>
     </section>
   );
 }

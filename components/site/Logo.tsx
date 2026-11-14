@@ -1,7 +1,11 @@
-import Image from "next/image";
-import mark from "@/public/crest-logo.png";
+import CrestMark from "./CrestMark";
 import { site } from "@/lib/site";
 
+/**
+ * The mark plus, optionally, the wordmark. Both are server-rendered vector:
+ * the mark is `CrestMark`, the wordmark is live text in the display face, so
+ * neither costs an image request and both are crisp at any density.
+ */
 export default function Logo({
   size = 28,
   withWordmark = true,
@@ -13,17 +17,13 @@ export default function Logo({
 }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <Image
-        src={mark}
-        alt={withWordmark ? "" : `${site.name} logo`}
-        width={size}
-        height={size}
-        priority
-        className="rounded-[22%] shadow-[0_2px_12px_-2px_rgba(18,58,158,.9)]"
-        style={{ width: size, height: size }}
+      <CrestMark
+        size={size}
+        title={withWordmark ? undefined : `${site.name} logo`}
+        className="drop-shadow-[0_2px_10px_rgba(24,0,173,0.7)]"
       />
       {withWordmark && (
-        <span className="text-[17px] font-semibold tracking-tight">
+        <span className="font-display text-[17px] font-semibold tracking-[-0.02em]">
           {site.name}
         </span>
       )}

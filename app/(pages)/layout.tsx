@@ -31,7 +31,7 @@ export default function PagesLayout({ children }: { children: ReactNode }) {
       <SiteHeader />
       {/* `flex-1` against the body's `min-h-full flex flex-col` is what keeps
           the footer at the bottom on a page shorter than the viewport. */}
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-20">{children}</main>
       <SiteFooter />
       <WhatsNew releases={releases} autoOpen={false} />
     </>

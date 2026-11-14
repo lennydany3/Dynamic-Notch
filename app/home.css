@@ -1,0 +1,556 @@
+/* ───────────────────────────────────────────────────────────────────────────
+   Crest v2 — home page
+   Everything here belongs to the redesigned marketing page. The sections are
+   Server Components, so motion that can be expressed in CSS is, and the few
+   client islands only write custom properties / attributes onto them.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* Illustration loops (keyframes ported from the design export). They read
+   --play so one observer can pause the ones that are off screen. */
+@keyframes cr-toast{0%{opacity:0;transform:translateY(26px)}14%{opacity:1;transform:translateY(0)}48%{opacity:1;transform:translateY(0) scale(1)}66%,100%{opacity:0;transform:translateY(-127px) scale(.4)}}
+@keyframes cr-bump{0%,63%{transform:scale(1,1)}70%{transform:scale(1.2,1.12)}79%{transform:scale(.96,.97)}87%,100%{transform:scale(1,1)}}
+@keyframes cr-dot{0%,66%{opacity:0}72%,94%{opacity:1}100%{opacity:0}}
+@keyframes cr-bar{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+@keyframes cr-scrub{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes cr-knob{0%{transform:translateX(0)}100%{transform:translateX(272px)}}
+@keyframes cr-file{0%{opacity:0;transform:translateY(100px)}6%{opacity:1;transform:translateY(100px)}24%{transform:translateY(-6px)}30%{transform:translateY(0)}82%{opacity:1;transform:translateY(0)}92%,100%{opacity:0;transform:translateY(0)}}
+@keyframes cr-fanL{0%,100%{transform:rotate(0)}30%,72%{transform:rotate(-15deg)}}
+@keyframes cr-fanR{0%,100%{transform:rotate(0)}30%,72%{transform:rotate(15deg)}}
+@keyframes cr-type1{0%{transform:translateX(0)}40%,100%{transform:translateX(136px)}}
+@keyframes cr-car1{0%{transform:translateX(0);opacity:1}40%{transform:translateX(136px);opacity:1}41%,100%{transform:translateX(136px);opacity:0}}
+@keyframes cr-type2{0%,44%{transform:translateX(0)}76%,100%{transform:translateX(120px)}}
+@keyframes cr-car2{0%,44%{transform:translateX(0);opacity:0}45%{transform:translateX(0);opacity:1}76%,100%{transform:translateX(120px);opacity:1}}
+@keyframes cr-shot{0%{opacity:0;transform:translateX(64px)}12%{opacity:1;transform:translateX(0)}84%{opacity:1;transform:translateX(0)}94%,100%{opacity:0;transform:translateX(0)}}
+@keyframes cr-switch{0%,38%{transform:translateY(0)}50%,88%{transform:translateY(56px)}100%{transform:translateY(0)}}
+@keyframes cr-ring{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.5)}}
+@keyframes cr-spin{to{transform:rotate(360deg)}}
+@keyframes cr-drift{0%,100%{transform:translateX(-6px)}50%{transform:translateX(8px)}}
+@keyframes cr-drift2{0%,100%{transform:translateX(-2px)}50%{transform:translateX(3px)}}
+@keyframes cr-spark{to{transform:translateX(-248px)}}
+@keyframes cr-ram{0%,100%{transform:scaleX(.6)}50%{transform:scaleX(.7)}}
+@keyframes cr-boot{0%,26%{opacity:0;transform:translateY(-22px)}42%{opacity:1;transform:translateY(2px)}48%,90%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(0)}}
+@keyframes cr-knobT{0%,8%{transform:translateX(0)}20%,92%{transform:translateX(18px)}100%{transform:translateX(0)}}
+@keyframes cr-trk{0%,8%{opacity:0}20%,92%{opacity:1}100%{opacity:0}}
+@keyframes cr-cd{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@keyframes cr-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes cr-packet{0%{transform:translateX(-100%);opacity:0}12%{opacity:1}88%{opacity:1}100%{transform:translateX(0);opacity:0}}
+@keyframes cr-dropfile{0%{opacity:0;transform:translateY(36px) scale(.96)}28%{opacity:1;transform:translateY(0) scale(1)}72%{opacity:1;transform:translateY(-150px) scale(.82)}100%{opacity:0;transform:translateY(-262px) scale(.3)}}
+
+/* ── The 3D mark ─────────────────────────────────────────────────────────────
+   Twenty stacked copies of the tile give it a body; six copies of the glyph,
+   each lifted a little further, give the "C" its own thickness. All of it is
+   laid out by CSS from three custom properties:
+     --s    the tile's edge length
+     --grow 0 → 1, animated through @property so the extrusion *unfolds*
+     --rx / --ry  the tilt in degrees, the one thing script ever writes
+   Without JavaScript the mark rests at its default tilt and still floats; the
+   pointer-follow in <MarkTilt> is purely an enhancement. */
+@property --grow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.mark3d {
+  --s: clamp(150px, 19vw, 220px);
+  --depth: calc(var(--s) * 0.26);
+  position: relative;
+  width: var(--s);
+  height: var(--s);
+  animation: mark-grow 1.4s var(--ease-bounce) 0.2s both;
+}
+
+.mark3d--sm {
+  --s: clamp(110px, 12vw, 140px);
+}
+
+@keyframes mark-grow {
+  from {
+    --grow: 0;
+  }
+  to {
+    --grow: 1;
+  }
+}
+
+@keyframes mark-float {
+  from {
+    transform: translateY(calc(var(--s) * -0.022));
+  }
+  to {
+    transform: translateY(calc(var(--s) * 0.022));
+  }
+}
+
+@keyframes mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mark3d__float {
+  position: absolute;
+  inset: 0;
+  animation: mark-float 5.5s ease-in-out infinite alternate;
+}
+
+.mark3d__scene {
+  position: absolute;
+  inset: 0;
+  perspective: 1000px;
+  animation: mark-in 0.7s var(--ease-spring) both;
+}
+
+.mark3d__rot {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--rx, -10) * 1deg)) rotateY(calc(var(--ry, 14) * 1deg));
+  will-change: transform;
+}
+
+.mark3d__layer {
+  position: absolute;
+  inset: var(--inset, 0%);
+  border-radius: 23%;
+  background: var(--bg);
+  transform: translateZ(calc(var(--depth) * var(--k) / 20 * -1 * var(--grow)));
+}
+
+.mark3d__face {
+  position: absolute;
+  inset: 2.4%;
+  border-radius: 22%;
+  overflow: hidden;
+  background: #1800ad;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -18px 40px rgba(2, 0, 40, 0.5);
+  transform: translateZ(0.5px);
+}
+
+.mark3d__spec {
+  position: absolute;
+  left: -20%;
+  top: -30%;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(176, 168, 255, 0.42), rgba(176, 168, 255, 0));
+  transform: translate(calc(var(--ry, 14) * -1.8%), calc(var(--rx, -10) * 1.8%));
+}
+
+.mark3d__glyph {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: translateZ(calc(1px + var(--k) * var(--s) * 0.012 * var(--grow)));
+}
+
+.mark3d__halo,
+.mark3d__glow,
+.mark3d__shadow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.mark3d__halo {
+  width: calc(var(--s) * 2);
+  height: calc(var(--s) * 2);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(91, 77, 255, 0.22), rgba(91, 77, 255, 0));
+  opacity: calc(0.9 * var(--grow));
+}
+
+.mark3d__glow {
+  width: calc(var(--s) * 2.4);
+  height: calc(var(--s) * 0.5);
+  transform: translate(-50%, calc(var(--s) * 0.5));
+  background: radial-gradient(closest-side, rgba(91, 77, 255, 0.36), rgba(91, 77, 255, 0));
+  opacity: calc(0.85 * var(--grow));
+}
+
+.mark3d__shadow {
+  width: calc(var(--s) * 0.9);
+  height: calc(var(--s) * 0.14);
+  transform: translate(-50%, calc(var(--s) * 0.68));
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  opacity: calc(0.7 * var(--grow));
+}
+
+/* Orbit rings: flat SVG layers inside the 3D context. The back half sits behind
+   the body, the front half in front of the glyph. */
+.mark3d__orbit {
+  position: absolute;
+  left: calc(50% - var(--s) * 0.98);
+  top: calc(50% - var(--s) * 0.98);
+  width: calc(var(--s) * 1.96);
+  height: calc(var(--s) * 1.96);
+  overflow: visible;
+  pointer-events: none;
+  opacity: var(--grow);
+}
+
+.mark3d__orbit--back {
+  transform: translateZ(calc(var(--depth) * -1.15));
+}
+
+.mark3d__orbit--front {
+  transform: translateZ(calc(var(--s) * 0.13));
+}
+
+/* Rotating aura behind everything. */
+@property --aura {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes mark-aura {
+  to {
+    --aura: 360deg;
+  }
+}
+
+.mark3d__aura {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--s) * 1.55);
+  height: calc(var(--s) * 1.55);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: conic-gradient(
+    from var(--aura),
+    rgba(91, 77, 255, 0) 0%,
+    rgba(91, 77, 255, 0.7) 18%,
+    rgba(181, 174, 255, 0.5) 30%,
+    rgba(91, 77, 255, 0) 48%,
+    rgba(24, 0, 173, 0.6) 72%,
+    rgba(91, 77, 255, 0) 100%
+  );
+  filter: blur(calc(var(--s) * 0.17));
+  opacity: calc(0.7 * var(--grow));
+  animation: mark-aura 14s linear infinite;
+  pointer-events: none;
+}
+
+/* Gloss that sweeps across the face, then rests. */
+@keyframes mark-shine {
+  0%,
+  55% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  80%,
+  100% {
+    transform: translateX(120%) skewX(-18deg);
+  }
+}
+
+.mark3d__shine {
+  position: absolute;
+  inset: -10% 0;
+  width: 42%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.34),
+    rgba(255, 255, 255, 0)
+  );
+  animation: mark-shine 6s ease-in-out 1.4s infinite;
+}
+
+/* Bloom on the front glyph so the "C" reads as emitting light. */
+.mark3d__glyph--front {
+  filter: drop-shadow(0 0 calc(var(--s) * 0.035) rgba(190, 182, 255, 0.75));
+}
+
+/* Floor ripples. */
+@keyframes mark-ripple {
+  from {
+    transform: translate(-50%, calc(var(--s) * 0.68)) scale(0.5);
+    opacity: 0.55;
+  }
+  to {
+    transform: translate(-50%, calc(var(--s) * 0.68)) scale(1.9);
+    opacity: 0;
+  }
+}
+
+.mark3d__ripple {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--s) * 0.9);
+  height: calc(var(--s) * 0.16);
+  border-radius: 50%;
+  border: 1px solid rgba(140, 130, 255, 0.7);
+  opacity: 0;
+  animation: mark-ripple 4s cubic-bezier(0.2, 0.6, 0.3, 1) 1s infinite;
+  pointer-events: none;
+}
+
+.mark3d__ripple--b {
+  animation-delay: 3s;
+}
+
+/* Drifting sparks. */
+@keyframes mark-spark {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(calc(var(--s) * -1.15));
+    opacity: 0;
+  }
+}
+
+.mark3d__spark {
+  position: absolute;
+  left: calc(-30% + var(--x) * 1.6%);
+  bottom: 8%;
+  width: var(--z);
+  height: var(--z);
+  border-radius: 50%;
+  background: #c4beff;
+  box-shadow: 0 0 8px 1px rgba(140, 130, 255, 0.8);
+  opacity: 0;
+  animation: mark-spark var(--t) linear var(--d) infinite;
+  pointer-events: none;
+}
+
+/* The notch pill above the mark: the product, in the logo's own frame. */
+@keyframes mark-pill {
+  0%,
+  30% {
+    width: calc(var(--s) * 0.5);
+    height: calc(var(--s) * 0.15);
+  }
+  42%,
+  80% {
+    width: calc(var(--s) * 1.12);
+    height: calc(var(--s) * 0.22);
+  }
+  92%,
+  100% {
+    width: calc(var(--s) * 0.5);
+    height: calc(var(--s) * 0.15);
+  }
+}
+
+@keyframes mark-pill-content {
+  0%,
+  36% {
+    opacity: 0;
+  }
+  50%,
+  76% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes mark-bar {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.mark3d__pill {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--s) * -0.34);
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 calc(var(--s) * 0.07);
+  border-radius: 999px;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 24px -8px rgba(0, 0, 0, 0.9),
+    0 0 30px -6px rgba(91, 77, 255, 0.45);
+  animation: mark-pill 7s var(--ease-bounce) 1.2s infinite both;
+  pointer-events: none;
+}
+
+.mark3d__pill-bars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 45%;
+  animation: mark-pill-content 7s ease 1.2s infinite both;
+}
+
+.mark3d__pill-bars i {
+  display: block;
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: #8c82ff;
+  animation: mark-bar 0.9s ease-in-out infinite;
+}
+
+.mark3d__pill-bars i:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.mark3d__pill-bars i:nth-child(3) {
+  animation-delay: -0.6s;
+}
+.mark3d__pill-bars i:nth-child(4) {
+  animation-delay: -0.15s;
+}
+
+.mark3d__pill-dot {
+  width: calc(var(--s) * 0.04);
+  height: calc(var(--s) * 0.04);
+  min-width: 5px;
+  min-height: 5px;
+  border-radius: 50%;
+  background: #8c82ff;
+  box-shadow: 0 0 10px 2px rgba(140, 130, 255, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark3d__aura,
+  .mark3d__shine,
+  .mark3d__ripple,
+  .mark3d__spark,
+  .mark3d__pill,
+  .mark3d__pill-bars,
+  .mark3d__pill-bars i {
+    animation: none;
+  }
+
+  .mark3d__dot {
+    display: none;
+  }
+
+  .mark3d__shine,
+  .mark3d__ripple,
+  .mark3d__spark {
+    opacity: 0;
+  }
+
+  .mark3d__pill {
+    width: calc(var(--s) * 0.5);
+    height: calc(var(--s) * 0.15);
+  }
+}
+
+/* ── Scroll reveal ───────────────────────────────────────────────────────────
+   Content is visible in the server HTML. <PageEffects> arms an element only
+   when it is below the fold on load, so nothing flashes and nothing is ever
+   hidden from a crawler or a reader without script. */
+[data-reveal][data-armed] {
+  opacity: 0;
+  translate: 0 18px;
+}
+
+[data-reveal][data-armed][data-in] {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 480ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0ms),
+    translate 560ms cubic-bezier(0.34, 1.3, 0.64, 1) var(--d, 0ms);
+}
+
+/* Feature-card hover: the lift and the indigo bloom. */
+.feature-card {
+  transition:
+    transform 420ms var(--ease-bounce),
+    border-color 300ms ease,
+    box-shadow 420ms ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(91, 77, 255, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(91, 77, 255, 0.16),
+    0 24px 60px -24px rgba(91, 77, 255, 0.55);
+}
+
+.pop {
+  transition: transform 380ms cubic-bezier(0.34, 1.5, 0.64, 1);
+}
+
+.pop:hover {
+  transform: translateY(-2px);
+}
+
+.pop:active {
+  transform: scale(0.97);
+}
+
+/* Timeline in "Built in public". */
+.tl-line {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 1400ms cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.tl-node {
+  opacity: 0;
+  transform: scale(0.4);
+  transition:
+    opacity 300ms ease,
+    transform 520ms cubic-bezier(0.34, 1.6, 0.64, 1);
+}
+
+[data-timeline][data-in] .tl-line {
+  transform: scaleX(1);
+}
+
+[data-timeline][data-in] .tl-node {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: var(--nd, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark3d,
+  .mark3d__float,
+  .mark3d__scene {
+    animation: none;
+  }
+
+  [data-reveal][data-armed] {
+    opacity: 1;
+    translate: none;
+  }
+
+  .tl-line,
+  .tl-node {
+    transition: none;
+  }
+
+  .feature-card:hover,
+  .pop:hover,
+  .pop:active {
+    transform: none;
+  }
+}
